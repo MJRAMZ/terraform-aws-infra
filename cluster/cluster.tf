@@ -218,3 +218,11 @@ resource "aws_route_table_association" "public" {
   subnet_id = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public.id
 }
+
+# Network Interface
+resource "aws_network_interface" "cluster-nic" {
+  subnet_id = aws.subnet.public
+  count = length(var.instance_ips)
+  private_ips = var.instance_ips[count.index]
+  security_groups = [aws_security_group.alb.id]
+}
