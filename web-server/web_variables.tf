@@ -5,6 +5,12 @@ variable "region" {
   default     = "us-west-2"
 }
 
+variable "key_name" {
+  type = string
+  description = "The AWS key pair to use for resources"
+  default = "web_server"
+}
+
 variable "instance_type" {
   type        = string
   description = "The instance type to launch"
