@@ -1,7 +1,7 @@
 # About
-The purpose of this branch is to deploy a simple single server web architecture in AWS that can respond to HTTP requests.
+The purpose of this branch is to deploy an auto-scaling server cluster architecture.
 
-![Single Server Architecture](/diagrams/AWS_Single-Server.png)
+![Auto-Scaling Architecture](/diagrams/aws_cluster.png)
 
 
 ## Pre-requisites
@@ -21,7 +21,7 @@ For this project I used AWS as my cloud provider
 
 ### Initialize Terraform
 * navigate to the **"base"** directory of your local repo copy
-    * `cd base`
+    * `cd cluster`
 * initialze the configuration file
     * `terraform init`
 * check the formatting of the configuration file
@@ -31,17 +31,17 @@ For this project I used AWS as my cloud provider
 
 ## Deploy Infrastructure
 * create and output an execution plan to a file
-    * ```terraform plan - out webserver-`date +'%s'`.plan```
+    * ```terraform plan - out cluster-`date +'%s'`.plan```
 * apply the execution plan
     * `terraform apply <plan_file_name>`
 
 You should see some output similar to the following:
 
-![Terraform Output](/diagrams/apply_outputs.png)
+![Terraform Output](/diagrams/)
 
 Give your instance a couple of minutes to boot up then check the server with a web-browser or `curl` command and you should see the following output:
 ```
-$ curl http://<Your_EC2_Instance_Public_IP>:8080
+$ curl http://<Your_ELB_DNS_NAME>
 Hello, World
 ```
 
