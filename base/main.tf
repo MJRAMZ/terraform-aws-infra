@@ -26,4 +26,12 @@ data "aws_ami" "ubuntu_latest" {
   }
 }
 
-// TODO - add additional resource for infratrcuture environment
+// EC2 virtual server instance
+resource "aws_instance" "single_server" {
+  ami = data.aws_ami.ubuntu_latest.id
+  instance_type = var.instance_type
+
+  tags = {
+    Name = "base"
+  }
+}
