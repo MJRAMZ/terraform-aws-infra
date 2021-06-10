@@ -28,8 +28,8 @@ data "aws_ami" "ubuntu_latest" {
 }
 
 // Security group
-resource "aws_security_group" "web_server" {
-  name = "web_server-sg"
+resource "aws_security_group" "cluster" {
+  name = "server_cluster-sg"
 
   ingress {
     from_port   = var.server_port
@@ -39,15 +39,17 @@ resource "aws_security_group" "web_server" {
   }
 }
 
-// Instance
-resource "aws_instance" "web_server" {
-  ami                    = data.aws_ami.ubuntu_latest.id
-  instance_type          = var.instance_type
-  vpc_security_group_ids = [aws_security_group.web_server.id]
-  user_data              = file("files/hello.sh")
-  key_name               = var.key_name
+// Launch configuration for server cluster
+resource "aws_launch_configuration" "cluster" {
+  image_id = data.aws_ami.ubuntu_latest.id
+  instance_type = var.instance_type
+  security_groups = [aws_security_group.cluster.id]
+  user_data = file("files/hello.sh")
+  key_name = var.key_name
 
-  tags = {
-    Name = "web_server"
+   # Required when using a launch configuration with an auto scaling group.
+  # https://www.terraform.io/docs/providers/aws/r/launch_configuration.html
+  lifecycle {
+    create_before_destroy = true
   }
 }
