@@ -12,13 +12,13 @@ variable "instance_type" {
 }
 
 variable "server_port" {
-  type = number
+  type        = number
   description = "The port the server will use for HTTP requests"
-  default = 8080
+  default     = 8080
 }
 
 # Outputs
 output "public_ip" {
-  value = aws_instance.web_server.public_ip
+  value       = aws_instance.web_server.public_ip
   description = "The public IP address of the web server."
 }
