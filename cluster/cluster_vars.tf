@@ -35,6 +35,12 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
+variable "instance_ips" {
+  type = list(string)
+  description = "The IPs to use for our instances"
+  default = ["10.0.1.20", "10.0.1.21"]
+}
+
 variable "server_port" {
   type        = number
   description = "The port the server will use for HTTP requests"
@@ -45,4 +51,10 @@ variable "vpc_cidr" {
   type = string
   description = "CIDR block address for VPC"
   default = "10.0.0.0/16"
+}
+
+variable "public_subnet" {
+  type = list(string)
+  description = "The list of public subnets to populate"
+  default = ["10.0.1.0/24"]
 }
