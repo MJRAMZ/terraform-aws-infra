@@ -53,3 +53,14 @@ resource "aws_launch_configuration" "cluster" {
     create_before_destroy = true
   }
 }
+
+# Data source for default vpc
+data "aws_vpc" "default" {
+  default = true
+}
+
+# Data source for default subnet ids
+data "aws_subnet_ids" "default" {
+  vpc_id = data.aws_vpc.default.id
+}
+
