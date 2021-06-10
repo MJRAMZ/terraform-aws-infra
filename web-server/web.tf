@@ -40,7 +40,7 @@ resource "aws_security_group" "web_server" {
 }
 
 // Instance
-resource "aws_ami" "web_server" {
+resource "aws_instance" "web_server" {
   ami                    = data.aws_ami.ubuntu_latest.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.web_server.id]
