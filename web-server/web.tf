@@ -31,7 +31,7 @@ data "aws_ami" "ubuntu_latest" {
 resource "aws_security_group" "web_server" {
   name = "web_server-sg"
 
-  ingress = {
+  ingress {
     from_port   = var.server_port
     to_port     = var.server_port
     protocol    = "tcp"
