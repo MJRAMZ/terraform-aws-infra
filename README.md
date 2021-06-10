@@ -6,7 +6,7 @@ The purpose of this project is to familiarize myself with Terraform and AWS by c
     * base terraform configuration
 * web-server
     * Configurable web-server
-* web-server-cluster
+* cluster
     * Cluster of web-servers with load-balancer and DB
 * reusable-infra
     * Multi-environemnt infrastructure
