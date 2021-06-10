@@ -12,21 +12,21 @@ The purpose of this project is to familiarize myself with Terraform and AWS by c
     * Multi-environemnt infrastructure
 
 ## Pre-requisites
-### Terraform
+#### Terraform
 * [Download/install Terraform](https://www.terraform.io/downloads.html)
 
-### Cloud provider
+#### Cloud provider
 For this project I used AWS as my cloud provider
 * [AWS Subscription](https://aws.amazon.com/)
 * [AWS CLI](https://aws.amazon.com/cli/)
 * [AWS CLI Configuration](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 
 ## Initial project config
-### Clone project
+#### Clone project
 * get a local copy of the project
     * `https://github.com/MJRAMZ/terraform-aws-infra.git`
 
-### Initialize Terraform
+#### Initialize Terraform
 * navigate to the **"base"** directory of your local repo copy
     * `cd base`
 * initialze the configuration file
