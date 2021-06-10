@@ -1,5 +1,7 @@
 # About
-The purpose of this project is to familiarize myself with Terraform and AWS by creating multiple novice infrastrucutre scenarios.
+The purpose of this branch is to deploy a simple single server web architecture in AWS that can respond to HTTP requests.
+
+![Single Server Architecture](/diagrams/AWS_Single-Server.png)
 
 ## Branches
 * main
