@@ -6,9 +6,9 @@ variable "region" {
 }
 
 variable "key_name" {
-  type = string
+  type        = string
   description = "The AWS key pair to use for resources"
-  default = "web_server"
+  default     = "web_server"
 }
 
 variable "instance_type" {

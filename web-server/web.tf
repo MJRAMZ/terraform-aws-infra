@@ -45,7 +45,7 @@ resource "aws_instance" "web_server" {
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.web_server.id]
   user_data              = file("files/hello.sh")
-  key_name = var.key_name
+  key_name               = var.key_name
 
   tags = {
     Name = "web_server"
