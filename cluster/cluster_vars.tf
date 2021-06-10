@@ -12,21 +12,21 @@ variable "key_name" {
 }
 
 variable "alb_name" {
-  type = string
+  type        = string
   description = "The name of the ALB"
-  default = "terraform-asg-cluster"
+  default     = "terraform-asg-cluster"
 }
 
 variable "instance_security_group_name" {
-  type = string
+  type        = string
   description = "The name of the securoty group for EC2 instances"
-  default = "terraform-cluster-instance-sg"
+  default     = "terraform-cluster-instance-sg"
 }
 
 variable "alb_security_group_name" {
-  type = string
+  type        = string
   description = "The name of the securoty group for the ALB"
-  default = "terraform-cluster-alb-sg"
+  default     = "terraform-cluster-alb-sg"
 }
 
 variable "instance_type" {
