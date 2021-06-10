@@ -19,6 +19,7 @@ provider "aws" {
 # Data source for Ubuntu AMI
 data "aws_ami" "ubuntu_latest" {
   owners = ["099720109477"]
+  most_recent = true
 
   filter {
     name   = "virtualization-type"
