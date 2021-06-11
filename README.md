@@ -35,9 +35,6 @@ For this project I used AWS as my cloud provider
 * apply the execution plan
     * `terraform apply <plan_file_name>`
 
-You should see some output similar to the following:
-
-![Terraform Output](/diagrams/)
 
 Give your instance a couple of minutes to boot up then check the server with a web-browser or `curl` command and you should see the following output:
 ```
