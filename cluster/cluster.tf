@@ -82,11 +82,23 @@ data "aws_subnet_ids" "default" {
   vpc_id = data.aws_vpc.default.id
 }
 
+# Data source for remote state
+data "terraform_remote_state" "db" {
+  backend = "s3"
+
+  config = {
+    bucket = var.db_remote_state_bucket
+    key    = var.db_remote_state_key
+    region = "us-east-2"
+  }
+}
+
 # Load balancer
 resource "aws_lb" "cluster" {
   name               = "terraform-asg-cluster"
   load_balancer_type = "application"
   subnets            = data.aws_subnet_ids.default.ids
+  security_groups    = [aws_security_group.alb.id]
 }
 
 # Load balancer listener
@@ -155,22 +167,6 @@ resource "aws_security_group" "alb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Allow SSH
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # Allow ICMP
-  ingress {
-    from_port   = 8
-    to_port     = 0
-    protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   # Allow all outbound requests
   egress {
     from_port   = 0
@@ -178,51 +174,4 @@ resource "aws_security_group" "alb" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-# VPC
-resource "aws_vpc" "cluster_vpc" {
-  cidr_block = var.vpc_cidr
-}
-
-# Gateway
-resource "aws_internet_gateway" "gw"{
-  vpc_id = aws_vpc.cluster_vpc.id
-
-}
-
-# Route table
-resource "aws_route_table" "cluster" {
-  vpc_id = aws_vpc.cluster_vpc.id
-
-  route {
-    cidr_block = "10.0.1.0/24"
-    gateway_id = aws_internet_gateway.gw.id
-  }
-}
-
-# Subnet
-resource "aws_subnet" "public" {
-  vpc_id = aws_vpc.cluster_vpc.id
-  cidr_block = var.public_subnet
-  availability_zone = "${var.region}a"
-
-  tags = {
-    Name = "cluster-public-subnet"
-  }
-}
-
-# Associate public subnet with route table
-resource "aws_route_table_association" "public" {
-  count = length(var.public_subnet)
-  subnet_id = aws_subnet.public[count.index].id
-  route_table_id = aws_route_table.public.id
-}
-
-# Network Interface
-resource "aws_network_interface" "cluster-nic" {
-  subnet_id = aws.subnet.public
-  count = length(var.instance_ips)
-  private_ips = var.instance_ips[count.index]
-  security_groups = [aws_security_group.alb.id]
 }
