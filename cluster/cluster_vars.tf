@@ -20,7 +20,7 @@ variable "db_remote_state_bucket" {
 variable "db_remote_state_key" {
   type        = string
   description = "The name of the key in the S3 bucket used for the database's remote state storage"
-  default = "remote_state_key"
+  default     = "remote_state_key"
 }
 
 variable "alb_name" {
@@ -48,9 +48,9 @@ variable "instance_type" {
 }
 
 variable "instance_ips" {
-  type = list(string)
+  type        = list(string)
   description = "The IPs to use for our instances"
-  default = ["10.0.1.20", "10.0.1.21"]
+  default     = ["10.0.1.20", "10.0.1.21"]
 }
 
 variable "server_port" {
@@ -60,13 +60,13 @@ variable "server_port" {
 }
 
 variable "vpc_cidr" {
-  type = string
+  type        = string
   description = "CIDR block address for VPC"
-  default = "10.0.0.0/16"
+  default     = "10.0.0.0/16"
 }
 
 variable "public_subnet" {
-  type = list(string)
+  type        = list(string)
   description = "The list of public subnets to populate"
-  default = ["10.0.1.0/24"]
+  default     = ["10.0.1.0/24"]
 }
