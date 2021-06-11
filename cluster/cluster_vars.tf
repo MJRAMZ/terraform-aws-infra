@@ -11,6 +11,18 @@ variable "key_name" {
   default     = "web_server"
 }
 
+variable "db_remote_state_bucket" {
+  description = "The name of the S3 bucket used for the database's remote state storage"
+  type        = string
+  # Add default value here
+}
+
+variable "db_remote_state_key" {
+  type        = string
+  description = "The name of the key in the S3 bucket used for the database's remote state storage"
+  default = "remote_state_key"
+}
+
 variable "alb_name" {
   type        = string
   description = "The name of the ALB"
